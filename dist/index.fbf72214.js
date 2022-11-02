@@ -534,11 +534,9 @@ function hmrAcceptRun(bundle, id) {
 },{}],"dKuy9":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-const baseURL = "https://restcountries.eu/rest/v2/name/";
-function fetchWeather(name) {
-    return fetch(baseURL + name).then((response)=>response.json()).catch((error)=>console.log(error));
-}
-exports.default = fetchWeather;
+const url = "https://restcountries.eu/rest/v2/name/";
+exports.default = fetchCountries(searchQuery);
+return fetch(url + searchQuery).then((response)=>console.log(response.json())); // .catch((error) => console.log(error));
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {

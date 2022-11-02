@@ -536,6 +536,38 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _fetchCountries = require("./js/fetchCountries");
 var _fetchCountriesDefault = parcelHelpers.interopDefault(_fetchCountries);
 
-},{"./js/fetchCountries":"dKuy9","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ShInH","8lqZg"], "8lqZg", "parcelRequire716c")
+},{"./js/fetchCountries":"dKuy9","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dKuy9":[function(require,module,exports) {
+
+},{}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}]},["ShInH","8lqZg"], "8lqZg", "parcelRequire716c")
 
 //# sourceMappingURL=index.975ef6c8.js.map

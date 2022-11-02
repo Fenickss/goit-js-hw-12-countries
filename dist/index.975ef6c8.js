@@ -537,7 +537,13 @@ var _fetchCountries = require("./js/fetchCountries");
 var _fetchCountriesDefault = parcelHelpers.interopDefault(_fetchCountries);
 
 },{"./js/fetchCountries":"dKuy9","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dKuy9":[function(require,module,exports) {
-fetch(`https://pokeapi.co/api/v2/ability/`).then((response)=>console.log(response.json()));
+fetch(`https://restcountries.com/v2/all`).then((response)=>{
+    return response.json();
+}).then((name)=>{
+    console.log(name);
+}).catch((error)=>{
+    console.log(error);
+});
 
 },{}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {

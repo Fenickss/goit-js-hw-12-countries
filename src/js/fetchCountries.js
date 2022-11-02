@@ -1,3 +1,10 @@
-fetch(`https://pokeapi.co/api/v2/ability/`).then((response) =>
-  console.log(response.json())
-);
+fetch(`https://restcountries.com/v2/all`)
+  .then((response) => {
+    return response.json();
+  })
+  .then((name) => {
+    console.log(name);
+  })
+  .catch((error) => {
+    console.log(error);
+  });

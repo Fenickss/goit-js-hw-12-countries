@@ -534,13 +534,11 @@ function hmrAcceptRun(bundle, id) {
 },{}],"dKuy9":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-const BASE_URL = `https://restcountries.eu/rest/v2`;
-function fetchCountryByName(name) {
-    return fetch(`${BASE_URL}/name/${name}`).then((response)=>console.log(response.json()));
+const baseURL = "https://restcountries.eu/rest/v2/name/";
+function fetchWeather(name) {
+    return fetch(baseURL + name).then((response)=>response.json()).catch((error)=>console.log(error));
 }
-exports.default = {
-    fetchCountryByName
-};
+exports.default = fetchWeather;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {

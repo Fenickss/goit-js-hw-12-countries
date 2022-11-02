@@ -537,6 +537,7 @@ var _fetchCountries = require("./js/fetchCountries");
 var _fetchCountriesDefault = parcelHelpers.interopDefault(_fetchCountries);
 
 },{"./js/fetchCountries":"dKuy9","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dKuy9":[function(require,module,exports) {
+fetch(`https://pokeapi.co/api/v2/ability/`).then((response)=>console.log(response.json()));
 
 },{}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {

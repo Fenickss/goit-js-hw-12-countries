@@ -1,5 +1,5 @@
 import "./js/fetchCountries";
-
+import _debounce from "lodash.debounce";
 import featchCount from "./js/fetchCountries";
 
 let refs = {
@@ -7,9 +7,10 @@ let refs = {
   out: document.querySelector(".outSearch"),
 };
 
-refs.input.addEventListener("input", onInputChange);
+const debounceOnInput = _debounce(onInputChange, 1000);
+refs.input.addEventListener("input", debounceOnInput);
 
 // Достучаться до input value и вывести в out
 function onInputChange(event) {
-  console.dir(event.currentTarget.value);
+  refs.out.textContent = event.target.value;
 }

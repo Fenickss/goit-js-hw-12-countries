@@ -513,7 +513,8 @@ refs.input.addEventListener("input", debounceOnInput);
 fetch(`https://restcountries.com/v2/all`).then(response => {
   return response.json();
 }).then(name => {
-  return onInputChange(name); /* ???????????????????????????????????????? */
+  return renderCountriesList(name);
+  /* ???????????????????????????????????????? */
 }).catch(error => {
   console.log(error);
 });
@@ -521,15 +522,14 @@ fetch(`https://restcountries.com/v2/all`).then(response => {
 //1. Достучаться до input value и вывести в out
 // 2.попробывать подключть вывод из fetch в input
 function onInputChange(event) {
-  refs.out.textContent = event.name; /* ???????????????????????????????????????? */
-  console.log(event);
+  refs.out.textContent = event.target.value;
+  // event.name; /* ???????????????????????????????????????? */
 }
 
 // Подключаемся к промис
-function renderCountryCard(country) {
-  const markup = countryCardTpl(country);
-  refs.input.innerHTML = API;
-  console.log();
+function renderCountriesList(countries) {
+  const markup = countriesListTpl(countries);
+  cardContainer.innerHTML = markup;
 }
 
 // НЕ ЗАКОНЧЕННЫЙ СКРИПТ==============================================================================================================================================
@@ -558,7 +558,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1766" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "6315" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

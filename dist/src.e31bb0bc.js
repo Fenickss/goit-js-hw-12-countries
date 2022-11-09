@@ -117,7 +117,13 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../node_modules/lodash.debounce/index.js":[function(require,module,exports) {
+})({"js/fetchCountries.js":[function(require,module,exports) {
+"use strict";
+
+var _index = _interopRequireDefault(require("../index"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+fetch(`https://restcountries.com/v2/all`).then(response => response.json()).then(data => (0, _index.default)(data)).catch(error => console.log(error));
+},{"../index":"index.js"}],"../node_modules/lodash.debounce/index.js":[function(require,module,exports) {
 var global = arguments[3];
 /**
  * lodash (Custom Build) <https://lodash.com/>
@@ -500,40 +506,44 @@ module.exports = debounce;
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = initialize;
+var _fetchCountries = _interopRequireDefault(require("./js/fetchCountries"));
 var _lodash = _interopRequireDefault(require("lodash.debounce"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-// import API from "./js/fetchCountries";
-
 let refs = {
   input: document.querySelector(".js-countrySearch"),
   out: document.querySelector(".outSearch")
 };
 const debounceOnInput = (0, _lodash.default)(onInputChange, 500);
 refs.input.addEventListener("input", debounceOnInput);
-fetch(`https://restcountries.com/v2/all`).then(response => {
-  return response.json();
-}).then(name => {
-  return renderCountriesList(name);
-  /* ???????????????????????????????????????? */
-}).catch(error => {
-  console.log(error);
-});
-
-//1. Достучаться до input value и вывести в out
-// 2.попробывать подключть вывод из fetch в input
-function onInputChange(event) {
-  refs.out.textContent = event.target.value;
-  // event.name; /* ???????????????????????????????????????? */
+let countries;
+function initialize(CountriesData) {
+  countries = CountriesData;
+  let options = "";
+  countries.forEach(country => options += `<input value=${country.alpha3Code}`);
+  refs.out.textContent = options;
+  console.log(options);
 }
 
-// Подключаемся к промис
+// Функция поиска стран с выводом на страницу
+function onInputChange(event) {
+  initialize(options);
+  refs.out.textContent = event.target.value;
+  console.log(event);
+}
+onInputChange();
+
+// Рендерим разметку всех деталей на страницу
 function renderCountriesList(countries) {
   const markup = countriesListTpl(countries);
   cardContainer.innerHTML = markup;
 }
 
 // НЕ ЗАКОНЧЕННЫЙ СКРИПТ==============================================================================================================================================
-},{"lodash.debounce":"../node_modules/lodash.debounce/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./js/fetchCountries":"js/fetchCountries.js","lodash.debounce":"../node_modules/lodash.debounce/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -558,7 +568,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "6315" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3115" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

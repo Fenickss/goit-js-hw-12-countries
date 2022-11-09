@@ -17,7 +17,7 @@ export default function initialize(CountriesData) {
   countries.forEach(
     (country) => (options += `<input value=${country.alpha3Code}`)
   );
-  refs.out.textContent = options;
+  refs.out.textContent = refs.input.options;
   console.log(options);
 }
 
@@ -27,7 +27,6 @@ function onInputChange(event) {
   refs.out.textContent = event.target.value;
   console.log(event);
 }
-onInputChange();
 
 // Рендерим разметку всех деталей на страницу
 function renderCountriesList(countries) {

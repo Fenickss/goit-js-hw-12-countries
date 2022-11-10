@@ -118,12 +118,17 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"js/fetchCountries.js":[function(require,module,exports) {
-"use strict";
+// import countriesCartTpl from "../teamplate/teamplate-card";
+// import initialize from "../index.js";
+// fetch(`https://restcountries.com/v2/all`)
+//   .then((response) => response.json())
+//   .then((countries) => {
+//     const markup = countriesCartTpl(countries);
 
-var _index = _interopRequireDefault(require("../index.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-fetch(`https://restcountries.com/v2/all`).then(response => response.json()).then(data => (0, _index.default)(data)).catch(error => console.log(error));
-},{"../index.js":"index.js"}],"../node_modules/handlebars/dist/handlebars.runtime.js":[function(require,module,exports) {
+//     console.log(markup);
+//   })
+//   .catch((error) => console.log(error));
+},{}],"../node_modules/handlebars/dist/handlebars.runtime.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 /**!
@@ -1708,17 +1713,17 @@ const templateFunction = _handlebars.default.template({
         }
         return undefined;
       };
-    return "  <input value=\"\" />\r\n  <ul class=\"country__name\">" + container.escapeExpression((helper = (helper = lookupProperty(helpers, "name") || (depth0 != null ? lookupProperty(depth0, "name") : depth0)) != null ? helper : container.hooks.helperMissing, typeof helper === "function" ? helper.call(depth0 != null ? depth0 : container.nullContext || {}, {
+    return "  <ul class=\"country__name\">" + container.escapeExpression((helper = (helper = lookupProperty(helpers, "name") || (depth0 != null ? lookupProperty(depth0, "name") : depth0)) != null ? helper : container.hooks.helperMissing, typeof helper === "function" ? helper.call(depth0 != null ? depth0 : container.nullContext || {}, {
       "name": "name",
       "hash": {},
       "data": data,
       "loc": {
         "start": {
-          "line": 3,
+          "line": 2,
           "column": 28
         },
         "end": {
-          "line": 3,
+          "line": 2,
           "column": 36
         }
       }
@@ -1745,7 +1750,7 @@ const templateFunction = _handlebars.default.template({
           "column": 0
         },
         "end": {
-          "line": 4,
+          "line": 3,
           "column": 9
         }
       }
@@ -2138,42 +2143,37 @@ module.exports = debounce;
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = initialize;
 require("./js/fetchCountries");
 var _teamplateCard = _interopRequireDefault(require("./teamplate/teamplate-card"));
 var _lodash = _interopRequireDefault(require("lodash.debounce"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-console.log(_teamplateCard.default);
 let refs = {
-  input: document.querySelector(".js-countrySearch"),
+  searchForm: document.querySelector(".js-countrySearch"),
   out: document.querySelector(".outSearch")
 };
 const debounceOnInput = (0, _lodash.default)(onInputChange, 500);
-refs.input.addEventListener("input", debounceOnInput);
-let countries;
-function initialize(CountriesData) {
-  countries = CountriesData;
-  let options = "";
-  countries.forEach(country => options += `<input value=${country.alpha3Code}`);
-  refs.out.textContent = refs.input.options;
-  console.log(options);
-}
+refs.searchForm.addEventListener("input", debounceOnInput);
 
-// Функция поиска стран с выводом на страницу
+// Функция поиска стран с выводом на страницу через input
 function onInputChange(event) {
-  refs.out.textContent = event.target.value;
-  console.log(event);
+  // const form = event.currentTarget;
+  // const searchQuery = form.elements.query.value;
+}
+onInputChange();
+fetchCountrisByName("Af").then(rendercountriesCart).catch(error => console.log(error));
+function fetchCountrisByName(coutriesByName) {
+  return fetch(`https://restcountries.com/v2/name/${coutriesByName}`).then(response => {
+    return response.json();
+  });
+  // .then(rendercountriesCart)
+  // .catch((error) => console.log(error));
 }
 
 // Рендерим разметку всех деталей на страницу
-function renderCountriesList(countries) {
-  const markup = countriesListTpl(countries);
-  cardContainer.innerHTML = markup;
+function rendercountriesCart(countries) {
+  const markup = (0, _teamplateCard.default)(countries);
+  refs.out.innerHTML = markup;
 }
-
 // НЕ ЗАКОНЧЕННЫЙ СКРИПТ==============================================================================================================================================
 },{"./js/fetchCountries":"js/fetchCountries.js","./teamplate/teamplate-card":"teamplate/teamplate-card.hbs","lodash.debounce":"../node_modules/lodash.debounce/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -2200,7 +2200,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50120" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2619" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

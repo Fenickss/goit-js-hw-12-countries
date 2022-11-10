@@ -13,7 +13,6 @@ refs.searchForm.addEventListener("input", onInputChange);
 function onInputChange(event) {
   const form = event.currentTarget;
   const searchQuery = form.elements.query.value;
-  console.log(form);
 
   API.fetchCountrisByName(searchQuery)
     .then(rendercountriesCart)
@@ -28,4 +27,3 @@ function rendercountriesCart(countries) {
   const markup = countriesCartTpl(countries);
   refs.out.innerHTML = markup;
 }
-// НЕ ЗАКОНЧЕННЫЙ СКРИПТ==============================================================================================================================================

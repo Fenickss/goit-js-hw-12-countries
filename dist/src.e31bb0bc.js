@@ -2192,7 +2192,6 @@ refs.searchForm.addEventListener("input", onInputChange);
 function onInputChange(event) {
   const form = event.currentTarget;
   const searchQuery = form.elements.query.value;
-  console.log(form);
   _apiSarvice.default.fetchCountrisByName(searchQuery).then(rendercountriesCart).catch(error => console.log(error));
 }
 
@@ -2204,7 +2203,6 @@ function rendercountriesCart(countries) {
   const markup = (0, _teamplateCard.default)(countries);
   refs.out.innerHTML = markup;
 }
-// НЕ ЗАКОНЧЕННЫЙ СКРИПТ==============================================================================================================================================
 },{"./js/fetchCountries":"js/fetchCountries.js","./teamplate/teamplate-card":"teamplate/teamplate-card.hbs","lodash.debounce":"../node_modules/lodash.debounce/index.js","./js/api-sarvice":"js/api-sarvice.js","./js/get-refs":"js/get-refs.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

@@ -2140,34 +2140,64 @@ function toNumber(value) {
 
 module.exports = debounce;
 
+},{}],"js/api-sarvice.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+const BASE_URL = "https://restcountries.com";
+function fetchCountrisByName(coutriesByName) {
+  return fetch(`${BASE_URL}/v2/name/${coutriesByName}`).then(response => {
+    return response.json();
+  });
+  // .then(rendercountriesCart)
+  // .catch((error) => console.log(error));
+}
+var _default = {
+  fetchCountrisByName
+}; // fetchCountrisByName("Af")
+//   .then(rendercountriesCart)
+//   .catch((error) => console.log(error));
+exports.default = _default;
+},{}],"js/get-refs.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = getRefs;
+function getRefs() {
+  return {
+    searchForm: document.querySelector(".js-countrySearch"),
+    out: document.querySelector(".outSearch")
+  };
+}
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
 
 require("./js/fetchCountries");
 var _teamplateCard = _interopRequireDefault(require("./teamplate/teamplate-card"));
 var _lodash = _interopRequireDefault(require("lodash.debounce"));
+var _apiSarvice = _interopRequireDefault(require("./js/api-sarvice"));
+var _getRefs = _interopRequireDefault(require("./js/get-refs"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-let refs = {
-  searchForm: document.querySelector(".js-countrySearch"),
-  out: document.querySelector(".outSearch")
-};
-const debounceOnInput = (0, _lodash.default)(onInputChange, 500);
-refs.searchForm.addEventListener("input", debounceOnInput);
+const refs = (0, _getRefs.default)();
+
+// const debounceOnInput = _debounce(onInputChange, 500);
+refs.searchForm.addEventListener("input", onInputChange);
 
 // Функция поиска стран с выводом на страницу через input
 function onInputChange(event) {
-  // const form = event.currentTarget;
-  // const searchQuery = form.elements.query.value;
+  const form = event.currentTarget;
+  const searchQuery = form.elements.query.value;
+  console.log(form);
+  _apiSarvice.default.fetchCountrisByName(searchQuery).then(rendercountriesCart).catch(error => console.log(error));
 }
-onInputChange();
-fetchCountrisByName("Af").then(rendercountriesCart).catch(error => console.log(error));
-function fetchCountrisByName(coutriesByName) {
-  return fetch(`https://restcountries.com/v2/name/${coutriesByName}`).then(response => {
-    return response.json();
-  });
-  // .then(rendercountriesCart)
-  // .catch((error) => console.log(error));
-}
+
+// .then(rendercountriesCart)
+// .catch((error) => console.log(error));
 
 // Рендерим разметку всех деталей на страницу
 function rendercountriesCart(countries) {
@@ -2175,7 +2205,7 @@ function rendercountriesCart(countries) {
   refs.out.innerHTML = markup;
 }
 // НЕ ЗАКОНЧЕННЫЙ СКРИПТ==============================================================================================================================================
-},{"./js/fetchCountries":"js/fetchCountries.js","./teamplate/teamplate-card":"teamplate/teamplate-card.hbs","lodash.debounce":"../node_modules/lodash.debounce/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./js/fetchCountries":"js/fetchCountries.js","./teamplate/teamplate-card":"teamplate/teamplate-card.hbs","lodash.debounce":"../node_modules/lodash.debounce/index.js","./js/api-sarvice":"js/api-sarvice.js","./js/get-refs":"js/get-refs.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;

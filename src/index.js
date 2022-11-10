@@ -1,34 +1,27 @@
 import "./js/fetchCountries";
 import countriesCartTpl from "./teamplate/teamplate-card";
 import _debounce from "lodash.debounce";
+import API from "./js/api-sarvice";
+import getRefs from "./js/get-refs";
 
-let refs = {
-  searchForm: document.querySelector(".js-countrySearch"),
-  out: document.querySelector(".outSearch"),
-};
+const refs = getRefs();
 
-const debounceOnInput = _debounce(onInputChange, 500);
-refs.searchForm.addEventListener("input", debounceOnInput);
+// const debounceOnInput = _debounce(onInputChange, 500);
+refs.searchForm.addEventListener("input", onInputChange);
 
 // Функция поиска стран с выводом на страницу через input
 function onInputChange(event) {
-  // const form = event.currentTarget;
-  // const searchQuery = form.elements.query.value;
-}
-onInputChange();
-fetchCountrisByName("Af")
-  .then(rendercountriesCart)
-  .catch((error) => console.log(error));
+  const form = event.currentTarget;
+  const searchQuery = form.elements.query.value;
+  console.log(form);
 
-function fetchCountrisByName(coutriesByName) {
-  return fetch(`https://restcountries.com/v2/name/${coutriesByName}`).then(
-    (response) => {
-      return response.json();
-    }
-  );
-  // .then(rendercountriesCart)
-  // .catch((error) => console.log(error));
+  API.fetchCountrisByName(searchQuery)
+    .then(rendercountriesCart)
+    .catch((error) => console.log(error));
 }
+
+// .then(rendercountriesCart)
+// .catch((error) => console.log(error));
 
 // Рендерим разметку всех деталей на страницу
 function rendercountriesCart(countries) {

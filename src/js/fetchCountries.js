@@ -1,4 +1,4 @@
-import initialize from "../index";
+import initialize from "../index.js";
 fetch(`https://restcountries.com/v2/all`)
   .then((response) => response.json())
   .then((data) => initialize(data))

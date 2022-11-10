@@ -1,6 +1,7 @@
-import API from "./js/fetchCountries";
+import "./js/fetchCountries";
+import countriesCartTpl from "./teamplate/teamplate-card";
 import _debounce from "lodash.debounce";
-
+console.log(countriesCartTpl);
 let refs = {
   input: document.querySelector(".js-countrySearch"),
   out: document.querySelector(".outSearch"),
@@ -23,7 +24,6 @@ export default function initialize(CountriesData) {
 
 // Функция поиска стран с выводом на страницу
 function onInputChange(event) {
-  initialize(options);
   refs.out.textContent = event.target.value;
   console.log(event);
 }

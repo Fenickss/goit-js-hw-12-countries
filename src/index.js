@@ -1,4 +1,3 @@
-import "./js/fetchCountries";
 import countriesCartTpl from "./teamplate/teamplate-card";
 import _debounce from "lodash.debounce";
 import API from "./js/api-sarvice";
@@ -12,7 +11,7 @@ refs.searchForm.addEventListener("input", onInputChange);
 // Функция поиска стран с выводом на страницу через input
 function onInputChange(event) {
   const form = event.currentTarget;
-  const searchQuery = form.elements.query.value;
+  const searchQuery = form.elements.name.value;
 
   API.fetchCountrisByName(searchQuery)
     .then(rendercountriesCart)

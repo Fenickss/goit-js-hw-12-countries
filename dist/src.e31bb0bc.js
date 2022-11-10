@@ -117,18 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/fetchCountries.js":[function(require,module,exports) {
-// import countriesCartTpl from "../teamplate/teamplate-card";
-// import initialize from "../index.js";
-// fetch(`https://restcountries.com/v2/all`)
-//   .then((response) => response.json())
-//   .then((countries) => {
-//     const markup = countriesCartTpl(countries);
-
-//     console.log(markup);
-//   })
-//   .catch((error) => console.log(error));
-},{}],"../node_modules/handlebars/dist/handlebars.runtime.js":[function(require,module,exports) {
+})({"../node_modules/handlebars/dist/handlebars.runtime.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 /**!
@@ -2177,7 +2166,6 @@ function getRefs() {
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
 
-require("./js/fetchCountries");
 var _teamplateCard = _interopRequireDefault(require("./teamplate/teamplate-card"));
 var _lodash = _interopRequireDefault(require("lodash.debounce"));
 var _apiSarvice = _interopRequireDefault(require("./js/api-sarvice"));
@@ -2191,7 +2179,7 @@ refs.searchForm.addEventListener("input", onInputChange);
 // Функция поиска стран с выводом на страницу через input
 function onInputChange(event) {
   const form = event.currentTarget;
-  const searchQuery = form.elements.query.value;
+  const searchQuery = form.elements.name.value;
   _apiSarvice.default.fetchCountrisByName(searchQuery).then(rendercountriesCart).catch(error => console.log(error));
 }
 
@@ -2203,7 +2191,7 @@ function rendercountriesCart(countries) {
   const markup = (0, _teamplateCard.default)(countries);
   refs.out.innerHTML = markup;
 }
-},{"./js/fetchCountries":"js/fetchCountries.js","./teamplate/teamplate-card":"teamplate/teamplate-card.hbs","lodash.debounce":"../node_modules/lodash.debounce/index.js","./js/api-sarvice":"js/api-sarvice.js","./js/get-refs":"js/get-refs.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./teamplate/teamplate-card":"teamplate/teamplate-card.hbs","lodash.debounce":"../node_modules/lodash.debounce/index.js","./js/api-sarvice":"js/api-sarvice.js","./js/get-refs":"js/get-refs.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -2228,7 +2216,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2619" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "8969" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
